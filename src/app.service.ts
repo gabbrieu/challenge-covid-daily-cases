@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  getChallengeMessage(): string {
+    return 'Backend Challenge 2021 🏅 - Covid Daily Cases';
   }
 }
