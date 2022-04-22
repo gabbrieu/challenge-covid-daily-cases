@@ -10,19 +10,19 @@ export class Cases {
   @IsString()
   location: string;
 
-  @Column()
+  @Column({ type: 'date' })
   @IsDate()
-  date: Date;
+  date: string;
 
   @Column()
   @IsString()
   variant: string;
 
-  @Column({ name: 'num_sequences' })
+  @Column({ name: 'num_sequences', type: 'decimal' })
   @IsNumber()
   numSequences: number;
 
-  @Column({ name: 'perc_sequences' })
+  @Column({ name: 'perc_sequences', type: 'decimal' })
   @IsNumber()
   percSequences: number;
 
