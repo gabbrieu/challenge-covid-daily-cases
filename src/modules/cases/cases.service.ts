@@ -16,7 +16,10 @@ export class CasesService {
   async getAllRegistersByDate(
     date: string,
   ): Promise<GetAllRegistersByDateResponseDto[]> {
-    const result: Cases[] = await this.repository.find({ date });
+    const result: Cases[] = await this.repository.find({
+      cache: true,
+      where: { date },
+    });
     const resultGroupedByVariant = this.groupByProperty(result, 'variant');
     const resultSplittedByVariant = Object.entries(resultGroupedByVariant).map(
       ([variant, data]) => ({

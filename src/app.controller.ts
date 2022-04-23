@@ -13,7 +13,25 @@ export class AppController {
     status: HttpStatus.OK,
     description: 'Mensagem retornada com sucesso',
   })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Aconteceu algum erro inesperado!',
+  })
   getChallengeMessage(): string {
     return this.appService.getChallengeMessage();
+  }
+
+  @Get('dates')
+  @ApiOperation({ summary: 'Lista as datas disponíveis no dataset' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Datas retornadadas com sucesso',
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Aconteceu algum erro inesperado!',
+  })
+  async getAllDates(): Promise<string[]> {
+    return await this.appService.getAllDates();
   }
 }
