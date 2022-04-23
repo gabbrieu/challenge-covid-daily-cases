@@ -2,6 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Cases } from './cases.entity';
+import {
+  DataResponse,
+  GetAllRegistersByDateResponseDto,
+} from './dto/response/getAllRegistersByDateResponse.dto';
 
 @Injectable()
 export class CasesService {
@@ -9,7 +13,9 @@ export class CasesService {
     @InjectRepository(Cases) private readonly repository: Repository<Cases>,
   ) {}
 
-  async getAllRegistersByDate(date: string) {
+  async getAllRegistersByDate(
+    date: string,
+  ): Promise<GetAllRegistersByDateResponseDto[]> {
     const result: Cases[] = await this.repository.find({ date });
     const resultGroupedByVariant = this.groupByProperty(result, 'variant');
     const resultSplittedByVariant = Object.entries(resultGroupedByVariant).map(
@@ -17,7 +23,7 @@ export class CasesService {
         variant,
         data,
       }),
-    );
+    ) as any;
 
     resultSplittedByVariant.forEach((r) => {
       const resultGroupedByLocation = this.groupByProperty(r.data, 'location');
@@ -26,10 +32,10 @@ export class CasesService {
           location,
           registers,
         }),
-      ) as any;
+      ) as DataResponse[];
     });
 
-    return resultSplittedByVariant;
+    return resultSplittedByVariant as GetAllRegistersByDateResponseDto[];
   }
 
   private groupByProperty<T extends Record<string, any>, K extends keyof T>(

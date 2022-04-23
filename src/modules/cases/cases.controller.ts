@@ -2,6 +2,8 @@ import { Controller, Get, HttpStatus, Param } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Cases } from './cases.entity';
 import { CasesService } from './cases.service';
+import { GetAllRegistersByDateDto } from './dto/request/getAllRegistersByDate.dto';
+import { GetAllRegistersByDateResponseDto } from './dto/response/getAllRegistersByDateResponse.dto';
 
 @Controller('cases')
 @ApiTags('Cases')
@@ -19,7 +21,17 @@ export class CasesController {
     description: 'Registros retornados com sucesso',
     type: Cases,
   })
-  async getAllRegistersByDate(@Param('date') date: string) {
-    return await this.service.getAllRegistersByDate(date);
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'A data enviada está no formato inválido',
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Aconteceu algum erro inesperado!',
+  })
+  async getAllRegistersByDate(
+    @Param() dto: GetAllRegistersByDateDto,
+  ): Promise<GetAllRegistersByDateResponseDto[]> {
+    return await this.service.getAllRegistersByDate(dto.date);
   }
 }

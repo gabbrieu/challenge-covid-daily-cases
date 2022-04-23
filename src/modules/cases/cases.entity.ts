@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsNumber, IsString } from 'class-validator';
+import { IsDateString, IsNumber, IsString } from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -14,7 +14,7 @@ export class Cases {
   location: string;
 
   @Column({ type: 'date' })
-  @IsDate()
+  @IsDateString()
   @ApiProperty({ description: 'Data das ocorrências' })
   date: string;
 
