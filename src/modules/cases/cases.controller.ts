@@ -13,7 +13,7 @@ export class CasesController {
   @Get(':date/count')
   @ApiOperation({
     summary:
-      'Lista todos os registros da base de dados no dia selecionado, agrupados por país e separados por variante.',
+      'Lista todos os registros da base de dados no dia selecionado, agrupados por país e separados por variante',
   })
   @ApiParam({ name: 'date', description: 'Data para filtrar os registros' })
   @ApiResponse({
@@ -33,5 +33,28 @@ export class CasesController {
     @Param() dto: GetAllRegistersByDateDto,
   ): Promise<GetAllRegistersByDateResponseDto[]> {
     return await this.service.getAllRegistersByDate(dto.date);
+  }
+
+  @Get(':date/cumulative')
+  @ApiOperation({
+    summary:
+      'Lista todos os registros da base de dados, retornando a soma dos casos registrados de acordo com a data selecionada, agrupados por país e separados por variante',
+  })
+  @ApiParam({ name: 'date', description: 'Data para filtrar os registros' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Registros retornados com sucesso',
+    type: Cases,
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'A data enviada está no formato inválido',
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Aconteceu algum erro inesperado!',
+  })
+  async getAllRegistersByDateAndSum(@Param() dto: GetAllRegistersByDateDto) {
+    return await this.service.getAllRegistersByDateAndSum(dto.date);
   }
 }

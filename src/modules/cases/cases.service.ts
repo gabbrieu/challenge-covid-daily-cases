@@ -52,4 +52,6 @@ export class CasesService {
       return objectsByKeyValue;
     }, {} as Record<string, T[]>);
   }
+
+  async getAllRegistersByDateAndSum(date: string) {}
 }
