@@ -11,23 +11,25 @@ export class CasesService {
 
   async getAllRegistersByDate(date: string) {
     const result: Cases[] = await this.repository.find({ date });
-    const groupedResultByLocation = this.groupByProperty(result, 'variant');
-    const test = Object.entries(groupedResultByLocation).map(
+    const resultGroupedByVariant = this.groupByProperty(result, 'variant');
+    const resultSplittedByVariant = Object.entries(resultGroupedByVariant).map(
       ([variant, data]) => ({
         variant,
         data,
       }),
     );
 
-    test.forEach((t) => {
-      const testGroup = this.groupByProperty(t.data, 'location');
-      t.data = Object.entries(testGroup).map(([location, registers]) => ({
-        location,
-        registers,
-      })) as any;
+    resultSplittedByVariant.forEach((r) => {
+      const resultGroupedByLocation = this.groupByProperty(r.data, 'location');
+      r.data = Object.entries(resultGroupedByLocation).map(
+        ([location, registers]) => ({
+          location,
+          registers,
+        }),
+      ) as any;
     });
 
-    return test;
+    return resultSplittedByVariant;
   }
 
   private groupByProperty<T extends Record<string, any>, K extends keyof T>(
