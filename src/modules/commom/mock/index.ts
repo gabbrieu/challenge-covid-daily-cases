@@ -54,6 +54,7 @@ export const selectQueryBuilderMock: () => SelectQueryBuilder<any> = jest.fn(
     execute: jest.fn().mockReturnThis(),
     orWhere: jest.fn().mockReturnThis(),
     clone: jest.fn().mockReturnThis(),
+    distinct: jest.fn().mockReturnThis(),
     getManyAndCount: jest.fn().mockImplementation(() => Promise.resolve([])),
     getRawMany: jest.fn().mockImplementation(() => Promise.resolve([])),
   }),
