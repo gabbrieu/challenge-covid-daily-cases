@@ -12,6 +12,7 @@
     - [Pré-requisitos](#pré-requisitos)
     - [🎲 Rodando a API](#-rodando-a-api)
   - [🛠 Tecnologias](#-tecnologias)
+  - [Link da apresentação](#link-da-apresentação)
   - [👦 Autor](#-autor)
   - [📝 Licença](#-licença)
 
@@ -106,6 +107,12 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 ---
 
+## Link da apresentação
+
+Como pedido pelo desafio, o link da apresentação é esse: https://www.loom.com/embed/dc92269baccc4845860f8d24abdf6008
+
+---
+
 ## 👦 Autor
 
 <img style="border-radius: 50%;" src="https://avatars3.githubusercontent.com/u/73564749?s=460&u=dca37f3c329fbfd9342f541e37629f9c2747afd6&v=4" width="100px;" alt="foto perfil"/>
@@ -118,7 +125,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 ## 📝 Licença
 
-Este projeto está sobe a licença [MIT](../LICENSE).
+Este projeto está sobe a licença [MIT](./LICENSE).
 
 Feito com ❤️ por Gabriel Mendes 👋🏽 [Entre em contato!](https://www.linkedin.com/in/gabbrieu/)
 
