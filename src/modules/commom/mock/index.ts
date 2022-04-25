@@ -1,7 +1,9 @@
-import { Repository } from 'typeorm';
+import { Repository, SelectQueryBuilder } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { Cases } from '../../cases/cases.entity';
 import { GetAllRegistersByDateResponseDto } from '../../cases/dto/response/getAllRegistersByDateResponse.dto';
+import { GetRegistersByDateAndSumNumberOfCasesResponseDto } from '../../cases/dto/response/getRegistersByDateAndSumNumberOfCasesResponse.dto';
+import { IGetCasesSumByDate } from '../types/types';
 
 export type MockType<T> = {
   [P in keyof T]: jest.Mock<{}>;
@@ -21,6 +23,39 @@ export const repositoryMockFactory: () => MockType<Repository<any>> = jest.fn(
     findAndCount: jest.fn((entity) => entity),
     createQueryBuilder: jest.fn((entity) => entity),
     query: jest.fn((entity) => entity),
+  }),
+);
+
+// @ts-ignore
+export const selectQueryBuilderMock: () => SelectQueryBuilder<any> = jest.fn(
+  () => ({
+    innerJoinAndSelect: jest.fn().mockReturnThis(),
+    leftJoinAndSelect: jest.fn().mockReturnThis(),
+    leftJoin: jest.fn().mockReturnThis(),
+    innerJoin: jest.fn().mockReturnThis(),
+    orderBy: jest.fn().mockReturnThis(),
+    addOrderBy: jest.fn().mockReturnThis(),
+    groupBy: jest.fn().mockReturnThis(),
+    addGroupBy: jest.fn().mockReturnThis(),
+    cache: jest.fn().mockReturnThis(),
+    skip: jest.fn().mockReturnThis(),
+    take: jest.fn().mockReturnThis(),
+    getMany: jest.fn().mockReturnThis(),
+    getRawOne: jest.fn().mockReturnThis(),
+    getOne: jest.fn().mockReturnThis(),
+    select: jest.fn().mockReturnThis(),
+    addSelect: jest.fn().mockReturnThis(),
+    where: jest.fn().mockReturnThis(),
+    andWhere: jest.fn().mockReturnThis(),
+    setParameters: jest.fn().mockReturnThis(),
+    setParameter: jest.fn().mockReturnThis(),
+    delete: jest.fn().mockReturnThis(),
+    from: jest.fn().mockReturnThis(),
+    execute: jest.fn().mockReturnThis(),
+    orWhere: jest.fn().mockReturnThis(),
+    clone: jest.fn().mockReturnThis(),
+    getManyAndCount: jest.fn().mockImplementation(() => Promise.resolve([])),
+    getRawMany: jest.fn().mockImplementation(() => Promise.resolve([])),
   }),
 );
 
@@ -80,3 +115,45 @@ export const getRegistersResponseMock: GetAllRegistersByDateResponseDto[] = [
     ],
   },
 ];
+
+export const getSumQueryResponseMock: IGetCasesSumByDate = {
+  location: 'Brazil',
+  total: 2,
+  variant: 'Beta',
+};
+
+export const getSumQueryResponseMock2: IGetCasesSumByDate = {
+  location: 'Angola',
+  total: 10,
+  variant: 'Beta',
+};
+
+export const getSumQueryResponseMock3: IGetCasesSumByDate = {
+  location: 'Brazil',
+  total: 50,
+  variant: 'Alpha',
+};
+
+export const getSumQueryResponseMock4: IGetCasesSumByDate = {
+  location: 'Angola',
+  total: 6,
+  variant: 'Alpha',
+};
+
+export const getSumFinalResponseMock: GetRegistersByDateAndSumNumberOfCasesResponseDto[] =
+  [
+    {
+      variant: 'Beta',
+      data: [
+        { location: 'Brazil', totalCasesUntilDate: 2 },
+        { location: 'Angola', totalCasesUntilDate: 10 },
+      ],
+    },
+    {
+      variant: 'Alpha',
+      data: [
+        { location: 'Brazil', totalCasesUntilDate: 50 },
+        { location: 'Angola', totalCasesUntilDate: 6 },
+      ],
+    },
+  ];
