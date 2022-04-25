@@ -45,6 +45,20 @@ Abra seu terminal/cmd e digite o comando abaixo:
 $ git clone git@github.com:gabbrieu/challenge-covid-daily-cases.git
 ```
 
+#### Rodando a api localmente
+
+Caso desejar rodar localmente o banco de dados, será necessário fazer o download do [CSV](https://challenges.coode.sh/covid/data/covid-variants.csv). Após, rode o comando em seu banco de dados local, substituindo 'caminho_do_arquivo' pelo caminho do arquivo em seu computador:
+
+```sql
+COPY cases (location, date, variant, num_sequences, perc_sequences, num_sequences_total) FROM 'caminho_do_arquivo' CSV HEADER
+```
+
+Caso não tenha permissão de superuser, pode rodar o seguinte comando no psql:
+
+```bash
+$ \copy cases (LOCATION, date, variant, num_sequences, perc_sequences, num_sequences_total) FROM '/home/gabbrieu/covid-variants.csv' CSV HEADER
+```
+
 Após, crie um arquivo chamado .env na raiz da pasta "challenge-covid-daily-cases" pelo terminal/cmd ou manualmente. Com isso, preencha-o seguindo como modelo o arquivo .env.example. Após, volte para o terminal/cmd e digite os comandos nessa ordem (levando em consideração que voçê esteja já na raiz da pasta challenge-covid-daily-cases, se não estiver a acesse pelo terminal/cmd):
 
 ```bash
