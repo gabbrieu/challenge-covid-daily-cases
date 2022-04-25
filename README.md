@@ -81,6 +81,13 @@ $ yarn test:cov
 $ yarn test:ver
 ```
 
+#### Rodando a api deployada do Heroku
+
+Essa API foi deployada no Heroku. A URL base é esta: https://challenge-coodesh-covid.herokuapp.com/
+Já o Swagger está na URL: https://challenge-coodesh-covid.herokuapp.com/api
+
+O Banco de dados foi criado no Supabase devido ao máximo de linhas permitido no plano gratúito do Heroku que é de 10.000 linhas, mas o banco fornecido tem 100.000+ linhas de dados.
+
 ---
 
 ## 🛠 Tecnologias
