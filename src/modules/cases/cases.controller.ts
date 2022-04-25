@@ -1,5 +1,11 @@
 import { Controller, Get, HttpStatus, Param } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiExtraModels,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Cases } from './cases.entity';
 import { CasesService } from './cases.service';
 import { GetAllRegistersByDateDto } from './dto/request/getAllRegistersByDate.dto';
@@ -7,6 +13,7 @@ import { GetAllRegistersByDateResponseDto } from './dto/response/getAllRegisters
 import { GetRegistersByDateAndSumNumberOfCasesResponseDto } from './dto/response/getRegistersByDateAndSumNumberOfCasesResponse.dto';
 
 @Controller('cases')
+@ApiExtraModels(Cases)
 @ApiTags('Cases')
 export class CasesController {
   constructor(private readonly service: CasesService) {}
@@ -20,7 +27,8 @@ export class CasesController {
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Registros retornados com sucesso',
-    type: Cases,
+    type: GetAllRegistersByDateResponseDto,
+    isArray: true,
   })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
@@ -45,7 +53,8 @@ export class CasesController {
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Registros retornados com sucesso',
-    type: Cases,
+    type: GetRegistersByDateAndSumNumberOfCasesResponseDto,
+    isArray: true,
   })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
