@@ -10,7 +10,7 @@ export class AppService {
   ) {}
 
   getChallengeMessage(): string {
-    return 'Backend Challenge 2021 🏅 - Covid Daily Cases';
+    return 'Backend Challenge 2022 🏅 - Covid Daily Cases';
   }
 
   async getAllDates(): Promise<string[]> {
