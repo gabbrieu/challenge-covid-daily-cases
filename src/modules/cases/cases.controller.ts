@@ -4,6 +4,7 @@ import { Cases } from './cases.entity';
 import { CasesService } from './cases.service';
 import { GetAllRegistersByDateDto } from './dto/request/getAllRegistersByDate.dto';
 import { GetAllRegistersByDateResponseDto } from './dto/response/getAllRegistersByDateResponse.dto';
+import { GetRegistersByDateAndSumNumberOfCasesResponseDto } from './dto/response/getRegistersByDateAndSumNumberOfCasesResponse.dto';
 
 @Controller('cases')
 @ApiTags('Cases')
@@ -38,7 +39,7 @@ export class CasesController {
   @Get(':date/cumulative')
   @ApiOperation({
     summary:
-      'Lista todos os registros da base de dados, retornando a soma dos casos registrados de acordo com a data selecionada, agrupados por país e separados por variante',
+      'Lista todos os registros da base de dados, retornando a soma dos casos registrados desde o primeiro dia até a data enviada, agrupados por país e separados por variante',
   })
   @ApiParam({ name: 'date', description: 'Data para filtrar os registros' })
   @ApiResponse({
@@ -54,7 +55,9 @@ export class CasesController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Aconteceu algum erro inesperado!',
   })
-  async getAllRegistersByDateAndSum(@Param() dto: GetAllRegistersByDateDto) {
-    return await this.service.getAllRegistersByDateAndSum(dto.date);
+  async getRegistersByDateAndSumNumberOfCases(
+    @Param() dto: GetAllRegistersByDateDto,
+  ): Promise<GetRegistersByDateAndSumNumberOfCasesResponseDto[]> {
+    return await this.service.getRegistersByDateAndSumNumberOfCases(dto.date);
   }
 }
