@@ -72,7 +72,7 @@ export class CasesService {
       .select('c.variant', 'variant')
       .addSelect('c.location', 'location')
       .addSelect('SUM(c.num_sequences) as total')
-      .where(`date BETWEEN '2020-07-06' AND :date`, { date })
+      .where(`date BETWEEN '2020-05-11' AND :date`, { date })
       .groupBy('c.location')
       .addGroupBy('c.variant')
       .cache(true)

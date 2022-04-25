@@ -18,6 +18,7 @@ export class AppService {
       .createQueryBuilder('c')
       .select('c.date::varchar', 'date')
       .distinct(true)
+      .orderBy('date')
       .cache(true)
       .getRawMany();
 
