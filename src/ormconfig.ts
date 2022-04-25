@@ -27,6 +27,7 @@ const config: TypeOrmModuleOptions = {
   logging: process.env.TYPEORM_LOGGING
     ? JSON.parse(process.env.TYPEORM_LOGGING)
     : false,
+  cache: { duration: 25000 },
   entities: [`${__dirname}/**/*.entity{.ts,.js}`],
   migrations: [
     path.join(
