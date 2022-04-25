@@ -25,6 +25,7 @@
 
 - [x] Envia a mensagem inicial de "Backend Challenge 2022 🏅 - Covid Daily Cases".
 - [x] Lista todos os registros da base de dados, retornando a soma dos casos registrados de acordo com a data selecionada, agrupados por país e separados por variante.
+- [x] Lista todos os registros da base de dados, retornando a soma dos casos registrados desde o primeiro dia até a data enviada, agrupados por país e separados por variante.
 - [x] Lista as datas disponíveis no dataset.
 
 ---
@@ -53,8 +54,17 @@ $ yarn
 # Execute a aplicação
 $ yarn start:dev
 
-# O servidor inciará na porta definida no .env - acesse <http://localhost:PORT> lá terá a API toda documentada e pronta pra uso com o próprio Swagger seguindo a Open API 3.0.
+# O servidor inciará na porta definida no .env - acesse <http://localhost:PORT/api> lá terá a API toda documentada e pronta pra uso com o próprio Swagger seguindo a Open API 3.0.
 # Mas você ainda pode utilizar o Postman e o Insomnia, ou qualquer outro se preferir.
+```
+
+Para os testes unitários rode o seguinte comando pelo terminal/cmd na pasta raíz do projeto:
+
+```bash
+$ yarn test:cov
+
+# Para ver os detalhes dos testes o seguinte comando pode ser rodado também
+$ yarn test:ver
 ```
 
 ---
